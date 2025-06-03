@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Panel de Muestra (Botones en Una Línea)</title>
+  <style>
+    /* =========================================================================
+       REINICIO GLOBAL
+    ========================================================================== */
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f4f4f4;
+      color: #222;
+    }
+
+    /* =========================================================================
+       DISEÑO: Contenedor y Cuadrícula
+    ========================================================================== */
+    .wrapper {
+      display: grid;
+      grid-template-rows: auto 1fr;
+      height: 100vh;
+    }
+
+    /* =========================================================================
+       BARRA DE NAVEGACIÓN: Todos los Botones en Una Línea
+    ========================================================================== */
+    nav {
+      background-color: #2c3e50;
+      padding: 0.5rem 1rem;
+      display: flex;
+      flex-wrap: nowrap;              /* Evita el salto de línea; mantiene los botones en una fila */
+      align-items: center;
+      justify-content: space-around;  /* Distribuye uniformemente los botones horizontalmente */
+      overflow-x: auto;               /* Si la ventana es estrecha, permite desplazamiento horizontal */
+    }
+
+    nav button {
+      background-color: #34495e;
+      border: 2px solid #1abc9c;
+      border-radius: 8px;
+      color: #ecf0f1;
+      padding: 0.75rem 1rem;
+      margin: 0 0.25rem;              /* Pequeño margen horizontal entre botones */
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      white-space: nowrap;            /* Impide que el texto del botón se divida en varias líneas */
+      transition: background-color 0.2s ease, transform 0.2s ease;
+    }
+
+    nav button:hover,
+    nav button:focus {
+      background-color: #1abc9c;
+      outline: none;
+      transform: translateY(-2px);
+    }
+
+    nav button:active {
+      background-color: #16a085;
+    }
+
+    nav button .icon {
+      width: 24px;
+      height: 24px;
+      background-color: #1abc9c;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 0.5rem;
+      font-size: 1rem;
+    }
+
+    /* =========================================================================
+       ÁREA DE CONTENIDO: Espacio para iframe, video, imagen de disclaimer o visor de PDF
+    ========================================================================== */
+    #content-area {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      background-color: #ffffff;
+      overflow: hidden;
+      outline: none; /* Permite enfoque aunque el div normalmente no es enfocanble */
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Si se usa iframe (infografías HTML) */
+    #content-area iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* Si se usa video (MP4) */
+    #content-area video {
+      width: 100%;
+      height: 100%;
+      background-color: #000;
+    }
+
+    /* Estilo para la imagen del disclaimer */
+    .disclaimer-imagen {
+      width: 100%;
+      max-height: 40%;
+      object-fit: contain;
+      background-color: #000;
+    }
+
+    /* =========================================================================
+       ESTILOS DEL VISOR DE PDF
+       - Envolvemos el iframe dentro de un contenedor que tiene dos botones de flecha
+         (“‹” y “›”) posicionados absolutamente para navegar las páginas del PDF.
+       - El .pdf-viewer-container ocupa el 100% del área de contenido.
+    ========================================================================== */
+    .pdf-viewer-container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      background: #e1e1e1;
+    }
+
+    .pdf-viewer-container iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .pdf-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 48px;
+      height: 48px;
+      background-color: rgba(0, 0, 0, 0.5);
+      color: #ffffff;
+      border: none;
+      border-radius: 24px;
+      font-size: 1.5rem;
+      line-height: 1;
+      cursor: pointer;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .pdf-arrow:focus {
+      outline: 2px solid #1abc9c;
+    }
+
+    .pdf-arrow-left {
+      left: 16px;
+    }
+
+    .pdf-arrow-right {
+      right: 16px;
+    }
+
+    /* =========================================================================
+       PUNTOS DE INTERRUPCIÓN RESPONSIVOS
+    ========================================================================== */
+    @media (max-width: 768px) {
+      nav {
+        justify-content: flex-start;  /* Alinea los botones a la izquierda; permite desplazamiento */
+      }
+      nav button {
+        margin: 0 0.25rem;            /* Mantiene un pequeño margen en móvil */
+      }
+      .pdf-arrow {
+        width: 40px;
+        height: 40px;
+        font-size: 1.25rem;
+        border-radius: 20px;
+      }
+      .pdf-arrow-left {
+        left: 8px;
+      }
+      .pdf-arrow-right {
+        right: 8px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <!-- =========================================================================
+         BARRA DE NAVEGACIÓN CON SEIS BOTONES GRÁFICOS (DISEÑO EN UNA LÍNEA)
+    ========================================================================== -->
+    <nav>
+      <button class="nav-btn" data-filename="mati_fire_lessons_infographic.html"
+              aria-label="Mostrar resumen y lecciones">
+        <span class="icon">📑</span>
+        Resumen y Lecciones
+      </button>
+
+      <button class="nav-btn" data-filename="mati_fire_victims_nfographic.html"
+              aria-label="Mostrar perfil de víctimas">
+        <span class="icon">📊</span>
+        Perfil de Víctimas
+      </button>
+
+      <button class="nav-btn" data-filename="mati_wildfire_infographic.html"
+              aria-label="Mostrar impacto y lecciones">
+        <span class="icon">🔥</span>
+        Impacto y Lecciones
+      </button>
+
+      <button class="nav-btn" data-filename="wildfire_communication_infographic.html"
+              aria-label="Mostrar retos de estrategia de comunicación">
+        <span class="icon">📣</span>
+        Retos de Comunicación
+      </button>
+
+      <button class="nav-btn" data-filename="video" aria-label="Mostrar video de reconstrucción">
+        <span class="icon">🎥</span>
+        Video de Reconstrucción
+      </button>
+
+      <button class="nav-btn" data-filename="MATI FIRE - FIRESCENE.pdf"
+              aria-label="Mostrar PDF de lecciones y cambios">
+        <span class="icon">📰</span>
+        Lecciones y Cambios
+      </button>
+    </nav>
+
+    <!-- =========================================================================
+         ÁREA DE CONTENIDO: Alojamiento para iframe, video, imagen de disclaimer o visor de PDF
+    ========================================================================== -->
+    <div id="content-area" tabindex="-1">
+      <!-- El contenido se cargará dinámicamente según el botón seleccionado -->
+    </div>
+  </div>
+
+  <script>
+    /**
+     * showboard.js (versión en español con disclaimer como imagen)
+     * ------------------------------------------------------------
+     * • Maneja archivos .html, .mp4, .pdf
+     * • Inserta .html mediante <iframe>; .mp4 mediante <video> precedido de imagen de disclaimer;
+     *   .pdf con visor que tiene botones de navegación ‹ y ›.
+     * • Si la extensión es desconocida, abre el archivo en una nueva pestaña.
+     */
+
+    (function () {
+      const navButtons = document.querySelectorAll(".nav-btn");
+      const contentArea = document.getElementById("content-area");
+
+      /**
+       * Elimina cualquier contenido existente del área de contenido.
+       */
+      function clearContentArea() {
+        while (contentArea.firstChild) {
+          contentArea.removeChild(contentArea.firstChild);
+        }
+      }
+
+      /**
+       * Inserta un archivo HTML usando un <iframe>.
+       * @param {string} filename
+       */
+      function loadHTML(filename) {
+        clearContentArea();
+        const iframe = document.createElement("iframe");
+        iframe.src = filename;
+        iframe.setAttribute("aria-label", "Contenido HTML integrado: " + filename);
+        contentArea.appendChild(iframe);
+      }
+
+      /**
+       * Inserta un archivo MP4 usando un elemento <video>, precedido de imagen de disclaimer.
+       * @param {string} filename
+       */
+      function loadVideoWithDisclaimerImage(filename) {
+        clearContentArea();
+
+        // Crear elemento <img> para mostrar el disclaimer
+        const imgDisclaimer = document.createElement("img");
+        imgDisclaimer.src = "0751c6ee-fc6b-44dd-9cfa-f8f8a0ac3296.png";
+        imgDisclaimer.alt = "Descargo de responsabilidad sobre la investigación";
+        imgDisclaimer.className = "disclaimer-imagen";
+
+        // Crear elemento de video
+        const video = document.createElement("video");
+        video.controls = true;
+        video.autoplay = false;
+        video.playsInline = true; // para navegadores móviles
+        video.setAttribute("aria-label", "Contenido de video integrado: Reconstrucción del incendio de Mati");
+
+        const source = document.createElement("source");
+        source.src = filename;
+        source.type = "video/mp4";
+        video.appendChild(source);
+
+        const fallbackText = document.createTextNode(
+          "Su navegador no admite la reproducción de video HTML5."
+        );
+        video.appendChild(fallbackText);
+
+        // Configurar estilos para que la imagen ocupe el 40% superior y el video el resto
+        imgDisclaimer.style.flexBasis = "40%";
+        video.style.flexGrow = "1";
+
+        // Contenedor para imagen + video
+        const container = document.createElement("div");
+        container.style.display = "flex";
+        container.style.flexDirection = "column";
+        container.style.height = "100%";
+
+        container.appendChild(imgDisclaimer);
+        container.appendChild(video);
+        contentArea.appendChild(container);
+      }
+
+      /**
+       * Inserta un archivo PDF a pantalla completa con navegación ‹›.
+       * @param {string} filename
+       */
+      function loadPDFWithNav(filename) {
+        clearContentArea();
+
+        // Contenedor para visor de PDF (iframe) y flechas de navegación
+        const container = document.createElement("div");
+        container.className = "pdf-viewer-container";
+
+        // Página actual (comienza en 1)
+        let currentPage = 1;
+
+        // Crear el <iframe> que mostrará el PDF
+        const pdfIframe = document.createElement("iframe");
+        pdfIframe.src = filename + "#page=" + currentPage;
+        pdfIframe.setAttribute("aria-label", "PDF integrado (página " + currentPage + "): " + filename);
+        container.appendChild(pdfIframe);
+
+        // Crear botón “‹” (página anterior)
+        const prevBtn = document.createElement("button");
+        prevBtn.className = "pdf-arrow pdf-arrow-left";
+        prevBtn.innerHTML = "&#8249;"; // Unicode “‹”
+        prevBtn.setAttribute("aria-label", "Página anterior");
+        prevBtn.addEventListener("click", () => {
+          if (currentPage > 1) {
+            currentPage--;
+            pdfIframe.src = filename + "#page=" + currentPage;
+            pdfIframe.setAttribute("aria-label", "PDF integrado (página " + currentPage + "): " + filename);
+          }
+        });
+        container.appendChild(prevBtn);
+
+        // Crear botón “›” (página siguiente)
+        const nextBtn = document.createElement("button");
+        nextBtn.className = "pdf-arrow pdf-arrow-right";
+        nextBtn.innerHTML = "&#8250;"; // Unicode “›”
+        nextBtn.setAttribute("aria-label", "Página siguiente");
+        nextBtn.addEventListener("click", () => {
+          currentPage++;
+          pdfIframe.src = filename + "#page=" + currentPage;
+          pdfIframe.setAttribute("aria-label", "PDF integrado (página " + currentPage + "): " + filename);
+        });
+        container.appendChild(nextBtn);
+
+        // Si falla el iframe al cargar (por ejemplo, sin complemento PDF),
+        // mostrar mensaje y enlace de descarga
+        pdfIframe.addEventListener("error", () => {
+          clearContentArea();
+          const fallbackDiv = document.createElement("div");
+          fallbackDiv.style.padding = "1rem";
+          fallbackDiv.style.textAlign = "center";
+          fallbackDiv.innerHTML = `
+            <p>Su navegador no puede mostrar este PDF en línea.</p>
+            <p>
+              <a href="${filename}" target="_blank" rel="noopener">
+                Haga clic aquí para descargar/abrir en una nueva ventana.
+              </a>
+            </p>
+          `;
+          contentArea.appendChild(fallbackDiv);
+        });
+
+        contentArea.appendChild(container);
+      }
+
+      /**
+       * Despachador: selecciona el cargador correcto según la extensión del archivo.
+       * @param {string} filename
+       */
+      function loadContent(filename) {
+        const lower = filename.toLowerCase();
+        if (lower.endsWith(".html")) {
+          loadHTML(filename);
+        } else if (lower.endsWith(".mp4")) {
+          loadVideoWithDisclaimerImage(filename);
+        } else if (lower.endsWith(".pdf")) {
+          loadPDFWithNav(filename);
+        } else {
+          // Para extensión desconocida, abrir en nueva pestaña
+          window.open(filename, "_blank");
+        }
+        contentArea.focus();
+      }
+
+      /**
+       * Agrega manejadores de eventos a cada botón de navegación.
+       * Al hacer clic, lee data-filename y carga el contenido.
+       */
+      navButtons.forEach((btn) => {
+        btn.addEventListener("click", (evt) => {
+          evt.preventDefault();
+          const file = btn.getAttribute("data-filename");
+          if (file === "video") {
+            // Ruta real del video dentro de la carpeta
+            loadContent("East Attica Disaster - Deploying Safety Management Principles towards Evolution.mp4");
+          } else {
+            loadContent(file);
+          }
+        });
+      });
+
+      /**
+       * Al cargar por primera vez, simula clic en el primer botón
+       * para que “Resumen y Lecciones” sea visible por defecto.
+       */
+      document.addEventListener("DOMContentLoaded", () => {
+        const firstBtn = document.querySelector(".nav-btn");
+        if (firstBtn) {
+          firstBtn.click();
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
