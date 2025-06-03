@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil de Víctimas del Incendio de Mati - 23 de julio de 2018</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .stat-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #e74c3c, #f39c12);
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+        
+        .stat-number {
+            font-size: 3em;
+            font-weight: bold;
+            color: #e74c3c;
+            margin-bottom: 10px;
+        }
+        
+        .stat-label {
+            font-size: 1.1em;
+            color: #666;
+            font-weight: 600;
+        }
+        
+        .chart-section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+        
+        .section-title {
+            font-size: 1.8em;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            text-align: center;
+            border-bottom: 3px solid #e74c3c;
+            padding-bottom: 10px;
+        }
+        
+        .chart-container {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        
+        .pie-chart {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            margin: 20px;
+        }
+        
+        .age-chart {
+            background: conic-gradient(#e74c3c 0% 57.7%, #3498db 57.7% 100%);
+        }
+        
+        .gender-chart {
+            background: conic-gradient(#e91e63 0% 52.9%, #2196f3 52.9% 100%);
+        }
+        
+        .location-chart {
+            background: conic-gradient(
+                #e74c3c 0% 71.1%, 
+                #f39c12 71.1% 91.3%, 
+                #3498db 91.3% 100%
+            );
+        }
+        
+        .chart-label {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            border-radius: 50%;
+            width: 120px;
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #2c3e50;
+            text-align: center;
+            font-size: 0.9em;
+        }
+        
+        .legend {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 3px;
+        }
+        
+        .vulnerable-groups {
+            background: linear-gradient(135deg, #f39c12, #e67e22);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .vulnerable-groups h3 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .vulnerable-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .vulnerable-item {
+            background: rgba(255,255,255,0.1);
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .factors-section {
+            background: linear-gradient(135deg, #34495e, #2c3e50);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .factors-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .factor-item {
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .factor-icon {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+        
+        .timeline {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+        
+        .timeline-item {
+            background: #f8f9fa;
+            padding: 20px;
+            border-left: 4px solid #e74c3c;
+            margin-bottom: 15px;
+            border-radius: 5px;
+        }
+        
+        .footer {
+            text-align: center;
+            color: white;
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(0,0,0,0.2);
+            border-radius: 10px;
+        }
+        
+        @media (max-width: 768px) {
+            .chart-container {
+                flex-direction: column;
+            }
+            
+            .pie-chart {
+                width: 150px;
+                height: 150px;
+            }
+            
+            .chart-label {
+                width: 90px;
+                height: 90px;
+                font-size: 0.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔥 TRAGEDIA DEL INCENDIO DE MATI</h1>
+            <p>Análisis del Perfil de Víctimas - 23 de julio de 2018 | Ática Oriental, Grecia</p>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number">104</div>
+                <div class="stat-label">Total de Fallecidos</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">74</div>
+                <div class="stat-label">Fallecieron en el Lugar del Incidente (71,1%)</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">21</div>
+                <div class="stat-label">Fallecieron en el Hospital (20,2%)</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">9</div>
+                <div class="stat-label">Ahogados en el Mar (8,7%)</div>
+            </div>
+        </div>
+
+        <div class="chart-section">
+            <h2 class="section-title">📍 ANÁLISIS DEL LUGAR DE FALLECIMIENTO</h2>
+            <div class="chart-container">
+                <div class="pie-chart location-chart">
+                    <div class="chart-label">Lugar de Fallecimiento</div>
+                </div>
+                <div class="legend">
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #e74c3c;"></div>
+                        <span>Zona del Incidente: 71,1%</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #f39c12;"></div>
+                        <span>Hospital: 20,2%</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #3498db;"></div>
+                        <span>Ahogados: 8,7%</span>
+                    </div>
+                </div>
+            </div>
+            <div style="margin-top: 20px; text-align: center; color: #666;">
+                <strong>95,9%</strong> de las víctimas en el lugar del incidente murieron <strong>fuera de estructuras</strong><br>
+                Solo <strong>5,4%</strong> murieron en espacios cerrados
+            </div>
+        </div>
+
+        <div class="chart-section">
+            <h2 class="section-title">👥 DISTRIBUCIÓN DEMOGRÁFICA</h2>
+            <div class="chart-container">
+                <div>
+                    <h3 style="text-align: center; margin-bottom: 15px;">Distribución por Edad</h3>
+                    <div class="pie-chart age-chart">
+                        <div class="chart-label">Grupos Etarios</div>
+                    </div>
+                    <div class="legend">
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: #e74c3c;"></div>
+                            <span>Más de 60: 57,7%</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: #3498db;"></div>
+                            <span>Menos de 60: 42,3%</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 style="text-align: center; margin-bottom: 15px;">Distribución por Género</h3>
+                    <div class="pie-chart gender-chart">
+                        <div class="chart-label">Género</div>
+                    </div>
+                    <div class="legend">
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: #e91e63;"></div>
+                            <span>Mujeres: 52,9%</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: #2196f3;"></div>
+                            <span>Hombres: 47,1%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="vulnerable-groups">
+            <h3>🚨 POBLACIONES VULNERABLES AFECTADAS</h3>
+            <div class="vulnerable-list">
+                <div class="vulnerable-item">
+                    <strong>👶 8 Niños</strong><br>
+                    Menores de 10 años (7,8%)
+                </div>
+                <div class="vulnerable-item">
+                    <strong>👵 Personas Mayores</strong><br>
+                    Víctima de mayor edad: 95 años
+                </div>
+                <div class="vulnerable-item">
+                    <strong>🍼 Más Joven</strong><br>
+                    Bebé de 6 meses
+                </div>
+                <div class="vulnerable-item">
+                    <strong>🌍 Extranjeros</strong><br>
+                    5 víctimas (4,8%) de Polonia, Georgia, Bélgica, Rumania
+                </div>
+            </div>
+        </div>
+
+        <div class="chart-section">
+            <h2 class="section-title">🏘️ VÍCTIMAS POR ASENTAMIENTO</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
+                <div style="text-align: center; padding: 20px; background: #f8f9fa; border-radius: 10px;">
+                    <div style="font-size: 2em; color: #e74c3c; font-weight: bold;">33</div>
+                    <div>Mati (44,6%)</div>
+                    <small>Muchos en la Avenida Poseidón</small>
+                </div>
+                <div style="text-align: center; padding: 20px; background: #f8f9fa; border-radius: 10px;">
+                    <div style="font-size: 2em; color: #e74c3c; font-weight: bold;">31</div>
+                    <div>Kokkino Limanaki (41,9%)</div>
+                    <small>26 en parcela única en Argyra Akti</small>
+                </div>
+                <div style="text-align: center; padding: 20px; background: #f8f9fa; border-radius: 10px;">
+                    <div style="font-size: 2em; color: #e74c3c; font-weight: bold;">7</div>
+                    <div>Neos Voutzas (9,5%)</div>
+                </div>
+                <div style="text-align: center; padding: 20px; background: #f8f9fa; border-radius: 10px;">
+                    <div style="font-size: 2em; color: #e74c3c; font-weight: bold;">3</div>
+                    <div>Otras Áreas (4%)</div>
+                    <small>Puerto de Rafina, Traslado a Hospital</small>
+                </div>
+            </div>
+        </div>
+
+        <div class="chart-section">
+            <h2 class="section-title">💀 CAUSA DE FALLECIMIENTO</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+                <div style="text-align: center; padding: 25px; background: linear-gradient(135deg, #e74c3c, #c0392b); color: white; border-radius: 15px;">
+                    <div style="font-size: 2.5em; margin-bottom: 10px;">🔥</div>
+                    <div style="font-size: 1.8em; font-weight: bold;">47</div>
+                    <div>Quemado (45,2%)</div>
+                </div>
+                <div style="text-align: center; padding: 25px; background: linear-gradient(135deg, #f39c12, #e67e22); color: white; border-radius: 15px;">
+                    <div style="font-size: 2.5em; margin-bottom: 10px;">🚑</div>
+                    <div style="font-size: 1.8em; font-weight: bold;">48</div>
+                    <div>Quemaduras Graves (46,1%)</div>
+                </div>
+                <div style="text-align: center; padding: 25px; background: linear-gradient(135deg, #3498db, #2980b9); color: white; border-radius: 15px;">
+                    <div style="font-size: 2.5em; margin-bottom: 10px;">🌊</div>
+                    <div style="font-size: 1.8em; font-weight: bold;">9</div>
+                    <div>Ahogados (8,7%)</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="factors-section">
+            <h2 class="section-title" style="color: white;">⚠️ FACTORES QUE CONTRIBUYERON AL ATRAPAMIENTO</h2>
+            <div class="factors-grid">
+                <div class="factor-item">
+                    <div class="factor-icon">🏔️</div>
+                    <h4>Topografía</h4>
+                    <p>Pendientes pronunciadas, carreteras estrechas, callejones sin salida</p>
+                </div>
+                <div class="factor-item">
+                    <div class="factor-icon">🏗️</div>
+                    <h4>Urbanismo</h4>
+                    <p>Mala organización espacial e infraestructura deficiente</p>
+                </div>
+                <div class="factor-item">
+                    <div class="factor-icon">🔥</div>
+                    <h4>Condiciones del Fuego</h4>
+                    <p>Calor extremo, humo tóxico, pérdida de visibilidad</p>
+                </div>
+                <div class="factor-item">
+                    <div class="factor-icon">😰</div>
+                    <h4>Pánico</h4>
+                    <p>Falta de información, desorientación, caos</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="timeline">
+            <h2 class="section-title">⏰ CRONOGRAMA CRÍTICO</h2>
+            <div class="timeline-item">
+                <strong>18:05</strong> - El fuego se propagó a las zonas residenciales de Neos Voutzas
+            </div>
+            <div class="timeline-item">
+                <strong>Después de las 18:05</strong> - Ocurrieron las 74 muertes en el lugar del incidente
+            </div>
+            <div class="timeline-item">
+                <strong>Hallazgo Clave:</strong> Si el incendio hubiera ocurrido de noche, las víctimas habrían sido exponencialmente más
+            </div>
+        </div>
+
+        <div class="footer">
+            <p><strong>Fuente:</strong> Informe Técnico por Andrianos Gkourbatsis, Contraalmirante Retirado - Subjefe del Estado Mayor, Experto Legal<br>
+            Investigador Especialista - Perito Judicial en Investigación de Delitos por Incendio, 2019</p>
+            <p style="margin-top: 10px; opacity: 0.8;">📍 Ática Oriental | 🏛️ Municipios de Rafina-Pikermi y Maratón</p>
+        </div>
+    </div>
+</body>
+</html>

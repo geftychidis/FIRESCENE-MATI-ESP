@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lecciones de comunicación de Protección Civil: Incendios forestales de Grecia 2018</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .infographic {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+            color: white;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                rgba(255,255,255,0.05) 10px,
+                rgba(255,255,255,0.05) 20px
+            );
+            animation: slide 20s linear infinite;
+        }
+        
+        @keyframes slide {
+            0% { transform: translateX(-50px); }
+            100% { transform: translateX(50px); }
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: bold;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .case-study {
+            background: #f8f9fa;
+            padding: 30px;
+            text-align: center;
+            border-bottom: 3px solid #e9ecef;
+        }
+        
+        .case-study h2 {
+            color: #2d3436;
+            font-size: 1.8em;
+            margin-bottom: 15px;
+        }
+        
+        .challenge-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .challenge-box {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            border-left: 4px solid #e74c3c;
+        }
+        
+        .challenge-box:hover {
+            transform: translateY(-5px);
+        }
+        
+        .challenge-box h4 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        
+        .challenge-box p {
+            color: #555;
+            font-size: 0.9em;
+            line-height: 1.5;
+        }
+        
+        .main-content {
+            padding: 40px;
+        }
+        
+        .lessons-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .lesson-category {
+            background: #fff;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-left: 5px solid #3498db;
+            transition: all 0.3s ease;
+        }
+        
+        .lesson-category:nth-child(2) { border-left-color: #e74c3c; }
+        .lesson-category:nth-child(3) { border-left-color: #f39c12; }
+        .lesson-category:nth-child(4) { border-left-color: #27ae60; }
+        
+        .lesson-category:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+        
+        .lesson-category h3 {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            color: #2c3e50;
+            display: flex;
+            align-items: center;
+        }
+        
+        .icon {
+            width: 30px;
+            height: 30px;
+            margin-right: 15px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .strategic { background: #3498db; }
+        .caring { background: #e74c3c; }
+        .framing { background: #f39c12; }
+        .timing { background: #27ae60; }
+        
+        .lesson-list {
+            list-style: none;
+        }
+        
+        .lesson-list li {
+            margin-bottom: 12px;
+            padding-left: 25px;
+            position: relative;
+            color: #555;
+        }
+        
+        .lesson-list li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: #3498db;
+            font-weight: bold;
+        }
+        
+        .framework {
+            background: linear-gradient(135deg, #74b9ff, #0984e3);
+            color: white;
+            padding: 40px;
+            border-radius: 15px;
+            margin: 40px 0;
+        }
+        
+        .framework h3 {
+            font-size: 1.8em;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        
+        .framework-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .step {
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .step-number {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            background: white;
+            color: #0984e3;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .recommendations {
+            background: #2d3436;
+            color: white;
+            padding: 40px;
+            margin-top: 40px;
+        }
+        
+        .recommendations h3 {
+            font-size: 1.8em;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        
+        .rec-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        
+        .recommendation {
+            background: rgba(255,255,255,0.1);
+            padding: 25px;
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .recommendation h4 {
+            color: #74b9ff;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+        
+        .footer {
+            background: #636e72;
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        @media (max-width: 768px) {
+            .lessons-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .framework-steps,
+            .rec-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="infographic">
+        <div class="header">
+            <h1>🔥 Lecciones de comunicación de Protección Civil</h1>
+            <p>Liderazgo en crisis durante desastres naturales: Perspectivas de los incendios forestales de Grecia 2018</p>
+        </div>
+        
+        <div class="case-study">
+            <h2>Caso de comunicación de riesgo: El desafío del incendio de Mati</h2>
+            <p>Un examen crítico de los errores y aciertos en la comunicación de crisis durante el incendio forestal más mortífero de Grecia</p>
+            
+            <div class="challenge-grid">
+                <div class="challenge-box">
+                    <h4>🚨 Crisis de comunicación</h4>
+                    <p>El Primer Ministro recibió fuertes críticas por las visitas tardías al lugar, la ambigüedad estratégica sobre las víctimas y la percepción de falta de empatía hacia los afectados</p>
+                </div>
+                <div class="challenge-box">
+                    <h4>⚠️ Brechas de información</h4>
+                    <p>Fallos de coordinación entre agencias de emergencia generaron mensajes contradictorios y retrasos en el reporte preciso de las víctimas</p>
+                </div>
+                <div class="challenge-box">
+                    <h4>📱 Presión mediática</h4>
+                    <p>La cobertura hostil de los medios amplificó la percepción pública de insensibilidad gubernamental y mala gestión de la comunicación</p>
+                </div>
+                <div class="challenge-box">
+                    <h4>🗳️ Consecuencias políticas</h4>
+                    <p>Los errores en comunicación contribuyeron a la derrota electoral un año después, demostrando el impacto a largo plazo del mensaje en crisis</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="main-content">
+            <div class="lessons-grid">
+                <div class="lesson-category">
+                    <h3><span class="icon strategic">EA</span>Ambigüedad estratégica</h3>
+                    <ul class="lesson-list">
+                        <li>Puede ser legítima durante fases iniciales de incertidumbre</li>
+                        <li>Permite flexibilidad en situaciones de rápida evolución</li>
+                        <li>Riesgo de percibirse como engañosa si se usa en exceso</li>
+                        <li>Debe transicionar a la claridad conforme se disponga de información</li>
+                        <li>Evitar lenguaje vago sobre el número de víctimas humanas</li>
+                    </ul>
+                </div>
+                
+                <div class="lesson-category">
+                    <h3><span class="icon caring">♥</span>Liderazgo empático</h3>
+                    <ul class="lesson-list">
+                        <li>La presencia física en el sitio del desastre es crucial</li>
+                        <li>Interacción directa con las comunidades afectadas</li>
+                        <li>Expresar empatía y compasión genuina</li>
+                        <li>Equilibrar el “hacer” con el “mostrar cuidado”</li>
+                        <li>Evitar parecer desconectado de las víctimas</li>
+                    </ul>
+                </div>
+                
+                <div class="lesson-category">
+                    <h3><span class="icon framing">📢</span>Enmarcado dinámico</h3>
+                    <ul class="lesson-list">
+                        <li>Enmarcar los esfuerzos de respuesta de manera clara y precisa</li>
+                        <li>Reconocer el alcance de la crisis sin perder el control narrativo</li>
+                        <li>Transicionar del manejo de la crisis a la planificación de la recuperación</li>
+                        <li>Presentar oportunidades para mejoras de políticas</li>
+                        <li>Evitar atribuir culpas de forma inconsistente</li>
+                    </ul>
+                </div>
+                
+                <div class="lesson-category">
+                    <h3><span class="icon timing">⏰</span>Tiempo y transparencia</h3>
+                    <ul class="lesson-list">
+                        <li>Respuesta inmediata dentro de las primeras horas de la crisis</li>
+                        <li>Actualizaciones regulares conforme evoluciona la situación</li>
+                        <li>Transparencia sobre lo que se sabe y lo que no se sabe</li>
+                        <li>Coordinar mensajes entre todas las agencias</li>
+                        <li>Prepararse para las necesidades de comunicación a largo plazo</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="framework">
+                <h3>🎯 Marco de comunicación en crisis</h3>
+                <div class="framework-steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <h4>Respuesta inmediata</h4>
+                        <p>Reconocer la magnitud de la crisis, movilizar recursos y asegurar una respuesta de emergencia coordinada</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <h4>Transición a la claridad</h4>
+                        <p>Pasar de la ambigüedad estratégica a la comunicación clara y factual conforme se disponga de información</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <h4>Presencia empática</h4>
+                        <p>Demostrar empatía mediante la presencia física y el compromiso directo con las comunidades afectadas</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <h4>Enfoque en la recuperación</h4>
+                        <p>Transicionar la narrativa hacia la recuperación, la reconstrucción y las mejoras de políticas para prevenir futuros desastres</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="recommendations">
+            <h3>🚀 Recomendaciones clave para agencias de Protección Civil</h3>
+            <div class="rec-grid">
+                <div class="recommendation">
+                    <h4>Fase de preparación</h4>
+                    <p>Desarrollar plantillas de mensajes preaprobados, establecer protocolos de comunicación claros y capacitar a los portavoces en principios de comunicación en crisis que equilibren claridad y ambigüedad estratégica.</p>
+                </div>
+                <div class="recommendation">
+                    <h4>Durante la crisis</h4>
+                    <p>Priorizar el flujo de información precisa entre agencias, evitar mensajes contradictorios y asegurar que los líderes demuestren cuidado y presencia visibles desde el inicio del desastre.</p>
+                </div>
+                <div class="recommendation">
+                    <h4>Poscrisis</h4>
+                    <p>Realizar auditorías de comunicación exhaustivas, aplicar las lecciones aprendidas y mantener el compromiso continuo con las comunidades afectadas durante todo el proceso de recuperación.</p>
+                </div>
+                <div class="recommendation">
+                    <h4>Integración sistémica</h4>
+                    <p>Incorporar enfoques empáticos y consideraciones de ambigüedad estratégica en los marcos de comunicación existentes, asegurando adaptaciones dinámicas a las distintas fases de la crisis.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p><strong>Fuente:</strong> Triantafillidou, A., & Yannas, P. (2023). Coping with natural disasters: Political leadership framing of the 2018 wildfires in Greece. <em>Journal of Contingencies and Crisis Management, 31</em>, 212–225.</p>
+            <p style="margin-top: 10px; opacity: 0.8;">Información basada en investigación para mejorar la eficacia de la comunicación en crisis en la gestión de desastres naturales</p>
+        </div>
+    </div>
+</body>
+</html>

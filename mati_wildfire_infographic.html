@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Incendio Forestal de Mati 2018 - El Desastre Natural Más Mortífero de Grecia</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            color: #fff;
+            line-height: 1.4;
+        }
+        
+        .infographic {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #1a1a1a;
+        }
+        
+        .header {
+            text-align: center;
+            padding: 40px 0;
+            background: linear-gradient(135deg, #ff4444 0%, #cc1100 100%);
+            border-radius: 15px;
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M20,20 Q30,10 40,20 T60,20 T80,20 Q90,30 80,40 T60,40 T40,40 Q30,50 40,60 T60,60 T80,60" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="2"/></svg>') repeat;
+            opacity: 0.3;
+        }
+        
+        .header h1 {
+            font-size: 3em;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .header .subtitle {
+            font-size: 1.2em;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .section {
+            background: linear-gradient(135deg, #2a2a2a 0%, #1f1f1f 100%);
+            border-radius: 15px;
+            padding: 25px;
+            border: 2px solid #333;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #ff4444, #ff6666, #ff4444);
+        }
+        
+        .section h2 {
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            color: #ff6666;
+            border-bottom: 2px solid #444;
+            padding-bottom: 10px;
+        }
+        
+        .fire-timeline {
+            grid-column: 1 / -1;
+            background: linear-gradient(135deg, #ff4444 0%, #aa2222 100%);
+        }
+        
+        .fire-timeline h2 {
+            color: #fff;
+            border-bottom-color: rgba(255,255,255,0.3);
+        }
+        
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            margin: 15px 0;
+            padding: 15px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .timeline-time {
+            font-size: 1.4em;
+            font-weight: bold;
+            min-width: 80px;
+            color: #ffff99;
+        }
+        
+        .timeline-content {
+            margin-left: 20px;
+            flex: 1;
+        }
+        
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        
+        .stat-card {
+            background: linear-gradient(135deg, #333 0%, #222 100%);
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid #444;
+            transition: transform 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #ff6666;
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            font-size: 0.9em;
+            color: #ccc;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .casualties-section {
+            background: linear-gradient(135deg, #442222 0%, #221111 100%);
+        }
+        
+        .casualties-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .casualty-breakdown {
+            background: rgba(255,255,255,0.05);
+            padding: 15px;
+            border-radius: 10px;
+        }
+        
+        .casualty-breakdown h3 {
+            color: #ff9999;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+        
+        .casualty-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #333;
+        }
+        
+        .casualty-item:last-child {
+            border-bottom: none;
+        }
+        
+        .weather-conditions {
+            background: linear-gradient(135deg, #2a4a6b 0%, #1a2a3b 100%);
+        }
+        
+        .weather-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .weather-card {
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+        }
+        
+        .weather-icon {
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+        
+        .weather-value {
+            font-size: 2em;
+            font-weight: bold;
+            color: #66ccff;
+        }
+        
+        .weather-label {
+            font-size: 0.9em;
+            color: #ccc;
+            margin-top: 5px;
+        }
+        
+        .impact-section {
+            grid-column: 1 / -1;
+            background: linear-gradient(135deg, #4a2a6b 0%, #2a1a3b 100%);
+        }
+        
+        .impact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .impact-card {
+            background: rgba(255,255,255,0.08);
+            padding: 25px;
+            border-radius: 15px;
+            border-left: 5px solid #9966ff;
+        }
+        
+        .impact-card h3 {
+            color: #bb99ff;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+        }
+        
+        .impact-list {
+            list-style: none;
+        }
+        
+        .impact-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #444;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .impact-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .response-section {
+            grid-column: 1 / -1;
+            background: linear-gradient(135deg, #2a6b4a 0%, #1a3b2a 100%);
+        }
+        
+        .response-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .response-card {
+            background: rgba(255,255,255,0.08);
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            border-top: 4px solid #66ff99;
+        }
+        
+        .response-number {
+            font-size: 2.2em;
+            font-weight: bold;
+            color: #66ff99;
+            display: block;
+        }
+        
+        .response-label {
+            font-size: 0.9em;
+            color: #ccc;
+            margin-top: 8px;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 30px;
+            background: linear-gradient(135deg, #333 0%, #111 100%);
+            border-radius: 15px;
+            margin-top: 30px;
+        }
+        
+        .footer h3 {
+            color: #ff6666;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+        
+        .footer p {
+            color: #ccc;
+            font-size: 1.1em;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        @media (max-width: 768px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .weather-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .casualties-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="infographic">
+        <div class="header">
+            <h1>🔥 INCENDIO FORESTAL DE MATI 2018</h1>
+            <div class="subtitle">El Desastre Natural Más Mortífero de Grecia • 23 de julio de 2018 • Región de Ática</div>
+        </div>
+        
+        <div class="section fire-timeline">
+            <h2>⏰ Cronología del Incendio y Eventos Críticos</h2>
+            <div class="timeline-item">
+                <div class="timeline-time">16:41</div>
+                <div class="timeline-content">
+                    <strong>Ignición del Incendio</strong><br>
+                    El incendio forestal comienza en Daou Pentelis, monte Penteli
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-time">~17:00</div>
+                <div class="timeline-content">
+                    <strong>Propagación Rápida Hacia el Este</strong><br>
+                    El fuego avanza hacia Mati, Neos Voutzas y Kallitechnoupoli
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-time">Noche</div>
+                <div class="timeline-content">
+                    <strong>Evacuaciones Masivas</strong><br>
+                    La Guardia Costera rescata a más de 700 personas de la costa
+                </div>
+            </div>
+        </div>
+        
+        <div class="main-grid">
+            <div class="section weather-conditions">
+                <h2>🌪️ Condiciones Meteorológicas Extremas</h2>
+                <div class="weather-grid">
+                    <div class="weather-card">
+                        <div class="weather-icon">💨</div>
+                        <div class="weather-value">124</div>
+                        <div class="weather-label">km/h Velocidad del Viento<br>(12 Beaufort)</div>
+                    </div>
+                    <div class="weather-card">
+                        <div class="weather-icon">🌡️</div>
+                        <div class="weather-value">38°C</div>
+                        <div class="weather-label">Temperatura</div>
+                    </div>
+                    <div class="weather-card">
+                        <div class="weather-icon">💧</div>
+                        <div class="weather-value">17%</div>
+                        <div class="weather-label">Humedad Relativa</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2>📊 Estadísticas del Incendio</h2>
+                <div class="stat-grid">
+                    <div class="stat-card">
+                        <span class="stat-number">1.431</span>
+                        <span class="stat-label">Hectáreas Quemadas</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">4.000</span>
+                        <span class="stat-label">Residentes Afectados</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">3</span>
+                        <span class="stat-label">Principales Asentamientos Afectados</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="main-grid">
+            <div class="section casualties-section">
+                <h2>💀 Víctimas Humanas</h2>
+                <div class="stat-grid" style="margin-bottom: 20px;">
+                    <div class="stat-card">
+                        <span class="stat-number">104</span>
+                        <span class="stat-label">Total de Fallecidos</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">187</span>
+                        <span class="stat-label">Total de Heridos</span>
+                    </div>
+                </div>
+                
+                <div class="casualties-grid">
+                    <div class="casualty-breakdown">
+                        <h3>Fallecidos por Género y Edad</h3>
+                        <div class="casualty-item">
+                            <span>Mujeres</span>
+                            <span>50 (48,1%)</span>
+                        </div>
+                        <div class="casualty-item">
+                            <span>Hombres</span>
+                            <span>43 (41,3%)</span>
+                        </div>
+                        <div class="casualty-item">
+                            <span>Niños</span>
+                            <span>11 (10,6%)</span>
+                        </div>
+                        <div class="casualty-item">
+                            <span>Más de 60 años</span>
+                            <span>57,7%</span>
+                        </div>
+                    </div>
+                    
+                    <div class="casualty-breakdown">
+                        <h3>Lugar de Fallecimiento</h3>
+                        <div class="casualty-item">
+                            <span>Mati</span>
+                            <span>33 (44,6%)</span>
+                        </div>
+                        <div class="casualty-item">
+                            <span>Kokkino Limanaki</span>
+                            <span>31 (41,9%)</span>
+                        </div>
+                        <div class="casualty-item">
+                            <span>Neos Voutzas</span>
+                            <span>7 (9,5%)</span>
+                        </div>
+                        <div class="casualty-item">
+                            <span>Ahogados en el mar</span>
+                            <span>9 (8,7%)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2>🏠 Daños Materiales</h2>
+                <div class="stat-grid">
+                    <div class="stat-card">
+                        <span class="stat-number">2.500+</span>
+                        <span class="stat-label">Viviendas Destruidas/ Dañadas</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">300</span>
+                        <span class="stat-label">Vehículos Quemados</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">€200M</span>
+                        <span class="stat-label">Daños Económicos</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section response-section">
+            <h2>🚒 Respuesta de Emergencia</h2>
+            <div class="response-grid">
+                <div class="response-card">
+                    <span class="response-number">286</span>
+                    <span class="response-label">Bomberos Desplegados</span>
+                </div>
+                <div class="response-card">
+                    <span class="response-number">96</span>
+                    <span class="response-label">Camiones de Bomberos Utilizados</span>
+                </div>
+                <div class="response-card">
+                    <span class="response-number">500+</span>
+                    <span class="response-label">Voluntarios Involucrados</span>
+                </div>
+                <div class="response-card">
+                    <span class="response-number">700+</span>
+                    <span class="response-label">Rescates de la Guardia Costera</span>
+                </div>
+                <div class="response-card">
+                    <span class="response-number">12</span>
+                    <span class="response-label">Camiones de Bomberos Voluntarios</span>
+                </div>
+                <div class="response-card">
+                    <span class="response-number">25</span>
+                    <span class="response-label">Voluntarios Adicionales</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section impact-section">
+            <h2>🌍 Impacto a Largo Plazo y Desafíos</h2>
+            <div class="impact-grid">
+                <div class="impact-card">
+                    <h3>🌲 Daños Ambientales</h3>
+                    <ul class="impact-list">
+                        <li><span>Terrenos forestales destruidos</span><span>Miles de hectáreas</span></li>
+                        <li><span>Áreas agrícolas arrasadas</span><span>Daños extensos</span></li>
+                        <li><span>Impacto ecológico a largo plazo</span><span>Recuperación en curso</span></li>
+                    </ul>
+                </div>
+                
+                <div class="impact-card">
+                    <h3>🏖️ Impacto en el Turismo</h3>
+                    <ul class="impact-list">
+                        <li><span>Cancelaciones de reservas</span><span>Descenso significativo</span></li>
+                        <li><span>Resorts costeros afectados</span><span>3 áreas principales</span></li>
+                        <li><span>Economía local afectada</span><span>Efectos duraderos</span></li>
+                    </ul>
+                </div>
+                
+                <div class="impact-card">
+                    <h3>🏗️ Daños a la Infraestructura</h3>
+                    <ul class="impact-list">
+                        <li><span>Avenida Maratón</span><span>Agravada severamente</span></li>
+                        <li><span>Líneas eléctricas dañadas</span><span>Cortes generalizados</span></li>
+                        <li><span>Abastecimiento de agua interrumpido</span><span>Daños en el sistema</span></li>
+                    </ul>
+                </div>
+                
+                <div class="impact-card">
+                    <h3>🚨 Desafíos en la Respuesta</h3>
+                    <ul class="impact-list">
+                        <li><span>Recursos limitados</span><span>Incendio de Kineta en curso</span></li>
+                        <li><span>Propagación rápida del fuego</span><span>Tiempo de reacción limitado</span></li>
+                        <li><span>Evacuación vehicular</span><span>Necesidad de cierres de carreteras</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <h3>🎯 Lecciones Clave Aprendidas</h3>
+            <p>
+                El incendio forestal de Mati 2018 puso de manifiesto brechas críticas en la preparación ante incendios, 
+                la coordinación de la respuesta de emergencia y la resiliencia de la infraestructura. Esta tragedia subrayó 
+                la necesidad urgente de mejorar los sistemas de alerta temprana, optimizar los procedimientos de evacuación 
+                y reforzar las capacidades de extinción para prevenir catástrofes similares en las regiones propensas a incendios de Grecia.
+            </p>
+        </div>
+    </div>
+</body>
+</html>
