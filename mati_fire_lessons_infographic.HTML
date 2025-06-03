@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INCENDIO DE MATI 2018: Lecciones de Protección Civil</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.4;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: white;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            border-radius: 15px 15px 0 0;
+            margin: -20px -20px 30px -20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 20"><defs><radialGradient id="a" cx="50%" cy="40%" r="50%"><stop offset="0%" stop-color="rgba(255,255,255,.1)"/><stop offset="100%" stop-color="rgba(255,255,255,0)"/></radialGradient></defs><rect width="100" height="20" fill="url(%23a)"/></svg>') repeat-x;
+            opacity: 0.3;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: bold;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .header .subtitle {
+            font-size: 1.2em;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .incident-overview {
+            background: linear-gradient(135deg, #ff9a9e, #fecfef);
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            border-left: 5px solid #ff6b6b;
+        }
+        
+        .incident-overview h2 {
+            color: #d63031;
+            margin-bottom: 15px;
+            font-size: 1.8em;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-top: 4px solid #ff6b6b;
+        }
+        
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #d63031;
+            display: block;
+        }
+        
+        .stat-label {
+            color: #666;
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+        
+        .lessons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+        
+        .lesson-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-top: 5px solid;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .lesson-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+        
+        .lesson-card.risk-assessment {
+            border-top-color: #e17055;
+            background: linear-gradient(135deg, #ffecd2, #fcb69f);
+        }
+        
+        .lesson-card.communication {
+            border-top-color: #0984e3;
+            background: linear-gradient(135deg, #a8edea, #fed6e3);
+        }
+        
+        .lesson-card.evacuation {
+            border-top-color: #00b894;
+            background: linear-gradient(135deg, #d299c2, #fef9d7);
+        }
+        
+        .lesson-card.crowd-management {
+            border-top-color: #fdcb6e;
+            background: linear-gradient(135deg, #fad0c4, #ffd1ff);
+        }
+        
+        .lesson-card.recovery {
+            border-top-color: #6c5ce7;
+            background: linear-gradient(135deg, #a8c0ff, #fbc2eb);
+        }
+        
+        .lesson-card h3 {
+            color: #2d3436;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .icon {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+        
+        .risk-assessment .icon { background: #e17055; }
+        .communication .icon { background: #0984e3; }
+        .evacuation .icon { background: #00b894; }
+        .crowd-management .icon { background: #fdcb6e; }
+        .recovery .icon { background: #6c5ce7; }
+        
+        .lesson-points {
+            list-style: none;
+        }
+        
+        .lesson-points li {
+            margin-bottom: 12px;
+            padding-left: 25px;
+            position: relative;
+            color: #2d3436;
+            line-height: 1.5;
+        }
+        
+        .lesson-points li::before {
+            content: '▶';
+            position: absolute;
+            left: 0;
+            color: #e17055;
+            font-size: 0.8em;
+        }
+        
+        .key-recommendations {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-top: 30px;
+        }
+        
+        .key-recommendations h2 {
+            margin-bottom: 20px;
+            font-size: 1.8em;
+            text-align: center;
+        }
+        
+        .recommendations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .recommendation {
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .recommendation h4 {
+            margin-bottom: 10px;
+            color: #fff;
+            font-size: 1.1em;
+        }
+        
+        .timeline {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 15px;
+            margin-top: 30px;
+            border-left: 5px solid #6c5ce7;
+        }
+        
+        .timeline h2 {
+            color: #6c5ce7;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+        
+        .timeline-item {
+            display: flex;
+            margin-bottom: 15px;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .timeline-time {
+            background: #6c5ce7;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            min-width: 120px;
+            text-align: center;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            color: #666;
+        }
+        
+        .source-note {
+            font-size: 0.9em;
+            font-style: italic;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                padding: 15px;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .lessons-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔥 INCENDIO DE MATI 2018</h1>
+            <div class="subtitle">Lecciones críticas aprendidas en Protección Civil</div>
+        </div>
+        
+        <div class="incident-overview">
+            <h2>📍 Resumen del Incidente</h2>
+            <p><strong>Fecha:</strong> 23 de julio de 2018 | <strong>Ubicación:</strong> Mati, Ática, Grecia | <strong>Hora de inicio:</strong> 16:41</p>
+            <p><strong>Condiciones:</strong> Condiciones extremas con vientos de fuerza de vendaval de hasta 124 km/h, temperatura de 38 °C, humedad del 17 %</p>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-number">104</span>
+                    <div class="stat-label">Fallecidos</div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">187</span>
+                    <div class="stat-label">Heridos</div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">2.500+</span>
+                    <div class="stat-label">Viviendas dañadas</div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">1.431</span>
+                    <div class="stat-label">Hectáreas quemadas</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="lessons-grid">
+            <div class="lesson-card risk-assessment">
+                <h3><span class="icon">⚠</span>Evaluación de Riesgos</h3>
+                <ul class="lesson-points">
+                    <li><strong>Monitoreo meteorológico insuficiente:</strong> Condiciones extremas (vientos de 12 en la escala Beaufort) no se integraron adecuadamente en la evaluación de riesgos</li>
+                    <li><strong>Vulnerabilidad de la interfaz urbano-forestal subestimada:</strong> Las áreas de interfaz urbano-forestal carecían de un mapeo de riesgos y análisis de vulnerabilidad adecuados</li>
+                    <li><strong>Fallo en la predicción del comportamiento del fuego:</strong> La rápida propagación e intensidad del incendio superaron las predicciones</li>
+                    <li><strong>Problemas en la asignación de recursos:</strong> Recursos de extinción limitados debido al incendio concurrente en Kineta</li>
+                    <li><strong>Necesidad de evaluación de riesgos dinámica:</strong> Se requieren sistemas de evaluación de riesgos en tiempo real para condiciones cambiantes</li>
+                </ul>
+            </div>
+            
+            <div class="lesson-card communication">
+                <h3><span class="icon">📢</span>Comunicación de Riesgos</h3>
+                <ul class="lesson-points">
+                    <li><strong>Sin sistema de alerta temprana:</strong> El sistema de alerta de emergencias 112 aún no estaba operativo</li>
+                    <li><strong>Mensajes inconsistentes:</strong> Información contradictoria de las autoridades generó confusión</li>
+                    <li><strong>Barrera del idioma:</strong> Las advertencias no se ofrecieron en varios idiomas para los turistas</li>
+                    <li><strong>Fallo en la coordinación con medios de comunicación:</strong> Falta de una estrategia coordinada de información pública</li>
+                    <li><strong>Brechas en la preparación comunitaria:</strong> Los residentes carecían de educación y conciencia sobre seguridad contra incendios</li>
+                </ul>
+            </div>
+            
+            <div class="lesson-card evacuation">
+                <h3><span class="icon">🚪</span>Planificación de Evacuación</h3>
+                <ul class="lesson-points">
+                    <li><strong>No se emitieron órdenes de evacuación:</strong> No se implementó evacuación temprana antes de que el fuego llegara a los asentamientos</li>
+                    <li><strong>Falta de planes de evacuación:</strong> Las comunidades no tenían procedimientos o rutas de evacuación establecidos</li>
+                    <li><strong>Rutas de escape inadecuadas:</strong> La red vial limitada generó cuellos de botella y atrapamientos</li>
+                    <li><strong>Sin alternativas de refugio en el lugar:</strong> Cuando la evacuación se volvió imposible, no hubo orientación para refugiarse de forma segura</li>
+                    <li><strong>Poblaciones vulnerables ignoradas:</strong> No se atendieron las necesidades especiales de ancianos, personas con discapacidad y niños</li>
+                </ul>
+            </div>
+            
+            <div class="lesson-card crowd-management">
+                <h3><span class="icon">👥</span>Gestión de Multitudes</h3>
+                <ul class="lesson-points">
+                    <li><strong>Caos vehicular y atrapamientos:</strong> Graves atascos de tráfico atraparon a personas en los vehículos</li>
+                    <li><strong>Caos en la evacuación por mar:</strong> La prisa descoordinada hacia las playas provocó ahogamientos</li>
+                    <li><strong>Sin plan de control de tráfico:</strong> La coordinación de la policía de tráfico fue insuficiente para condiciones de emergencia</li>
+                    <li><strong>Pánico y toma de decisiones deficiente:</strong> La gente tomó decisiones fatales debido a la falta de orientación</li>
+                    <li><strong>Sobrecarga de recursos:</strong> La capacidad de los servicios de emergencia se vio superada por la escala de la evacuación</li>
+                </ul>
+            </div>
+            
+            <div class="lesson-card recovery">
+                <h3><span class="icon">🔄</span>Problemas de Recuperación</h3>
+                <ul class="lesson-points">
+                    <li><strong>Desafíos en identificación:</strong> Las quemaduras graves dificultaron la identificación de las víctimas</li>
+                    <li><strong>Trauma psicológico generalizado:</strong> Supervivientes y familias necesitaron amplio apoyo de salud mental</li>
+                    <li><strong>Brechas en seguros:</strong> Muchas pérdidas de propiedad no estaban adecuadamente cubiertas</li>
+                    <li><strong>Impacto económico subestimado:</strong> Daños por más de 200 millones de € afectaron a toda la región</li>
+                    <li><strong>Desplazamiento comunitario a largo plazo:</strong> La reconstrucción tardó años, afectando el tejido social</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="timeline">
+            <h2>⏰ Cronología Crítica</h2>
+            <div class="timeline-item">
+                <div class="timeline-time">16:41</div>
+                <div>El incendio se inició en Daou Pentelis, monte Penteli</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-time">17:00-18:00</div>
+                <div>Propagación rápida hacia el este en dirección a los asentamientos costeros</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-time">18:00-19:00</div>
+                <div>El fuego llega a Mati y comunidades circundantes</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-time">19:00-20:00</div>
+                <div>Se producen víctimas masivas, personas atrapadas en vehículos y en el mar</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-time">Noche</div>
+                <div>La Guardia Costera rescata a más de 700 personas de las playas</div>
+            </div>
+        </div>
+        
+        <div class="key-recommendations">
+            <h2>🎯 Recomendaciones Clave Implementadas después de 2018</h2>
+            <div class="recommendations-grid">
+                <div class="recommendation">
+                    <h4>📱 Sistema de alerta de emergencias 112</h4>
+                    <p>Operativo desde 2020, permitiendo alertas masivas por SMS para avisos de evacuación</p>
+                </div>
+                <div class="recommendation">
+                    <h4>⚡ Política de evacuación temprana</h4>
+                    <p>Consideración obligatoria de evacuación temprana para todas las amenazas de incendios en la interfaz urbano-forestal</p>
+                </div>
+                <div class="recommendation">
+                    <h4>🏛️ Reforma de Protección Civil</h4>
+                    <p>La Ley 4662/2020 fortaleció el marco institucional y la coordinación</p>
+                </div>
+                <div class="recommendation">
+                    <h4>🏃‍♂️ Preparación comunitaria</h4>
+                    <p>Planes municipales de evacuación (“IOLAOS”) ahora obligatorios para áreas de interfaz urbano-forestal</p>
+                </div>
+                <div class="recommendation">
+                    <h4>🎯 Capacitación y ejercicios</h4>
+                    <p>Ahora se realizan regularmente simulacros de evacuación y ejercicios de escritorio</p>
+                </div>
+                <div class="recommendation">
+                    <h4>🌊 Estrategias alternativas</h4>
+                    <p>Se desarrollaron pautas de refugio en el lugar para cuando la evacuación es imposible</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <div class="source-note">
+                <strong>Fuentes:</strong> Basado en informes oficiales del incidente, investigaciones académicas sobre las temporadas de incendios de Grecia 2021-2022 y análisis de políticas de Protección Civil.<br>
+                <em>Esta infografía sirve como recurso educativo para la gestión de crisis y planificación de sistemas de defensa.</em>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
